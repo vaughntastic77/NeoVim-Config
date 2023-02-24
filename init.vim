@@ -35,7 +35,7 @@ nnoremap <M-up> ddkP
 inoremap <M-down> <esc>ddp
 inoremap <M-up> <esc>ddkP
 ",/ to clear search highlighting
-nnoremap <leader>/ /nothingatall
+nnoremap <leader>/ /nothingatall<CR>
 
 "------------
 "| Settings |
