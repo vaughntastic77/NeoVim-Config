@@ -19,8 +19,10 @@ nnoremap <C-t> :FloatermToggle<CR>
 tnoremap <C-t> <C-\><C-n>:FloatermToggle<CR>
 "LazyGit
 nnoremap <leader>gg :FloatermNew lazygit<CR>
-"vim-calc
-nnoremap <leader>c :call Calc()<CR>
+"Calculate current line
+nnoremap <leader>c yy:<C-r>=<C-r>0<CR>
+"Calculate current line and insert result
+nnoremap <leader>C yya<C-r>=<C-r>0<CR>
 "Drag lines
 vnoremap <M-j> :m'>+<CR>gv
 vnoremap <M-k> :m-2<CR>gv
@@ -102,8 +104,6 @@ Plug 'unblevable/quick-scope'
 "Quick container editing
 Plug 'jiangmiao/auto-pairs' 
 Plug 'tpope/vim-surround' 
-"Calculator
-Plug 'theniceboy/vim-calc'
 
 "Plugin config
 let g:vimtex_view_method = 'skim'
