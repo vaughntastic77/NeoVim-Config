@@ -10,9 +10,11 @@ cnoremap Q q!
 nnoremap <M-.> :<up><CR>
 ",0 to go to end of line
 nnoremap <leader>0 $
-",y/p to copy/paste to system in visual mode
+",y/p to copy/paste to system
 vnoremap <leader>y "+y
+nnoremap <leader>y "+y
 vnoremap <leader>p "+p
+nnoremap <leader>p "+p
 "Y to copy to end of line
 nnoremap Y y$
 "Terminal Floaterm
