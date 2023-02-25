@@ -10,8 +10,9 @@ cnoremap Q q!
 nnoremap <M-.> :<up><CR>
 ",0 to go to end of line
 nnoremap <leader>0 $
-",y to copy to system in visual mode
+",y/p to copy/paste to system in visual mode
 vnoremap <leader>y "+y
+vnoremap <leader>p "+p
 "Y to copy to end of line
 nnoremap Y y$
 "Terminal Floaterm
@@ -20,9 +21,11 @@ tnoremap <C-t> <C-\><C-n>:FloatermToggle<CR>
 "LazyGit
 nnoremap <leader>gg :FloatermNew lazygit<CR>
 "Calculate current line
-nnoremap <leader>c yy:<C-r>=<C-r>0<CR>
-"Calculate current line and insert result
-nnoremap <leader>C yya<C-r>=<C-r>0<CR>
+nnoremap <leader>c yy:echo <C-r>=<C-r>0<CR><CR>
+"Paste last calculated line
+nnoremap <leader>C a<C-r>=<C-r>0<CR><esc>
+"Insert and calculate
+nnoremap <leader>= a<C-r>=
 "Drag lines
 vnoremap <M-j> :m'>+<CR>gv
 vnoremap <M-k> :m-2<CR>gv
