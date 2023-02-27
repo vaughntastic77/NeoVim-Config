@@ -17,17 +17,13 @@ vnoremap <leader>p "+p
 nnoremap <leader>p "+p
 "Y to copy to end of line
 nnoremap Y y$
-"Terminal Floaterm
-nnoremap <C-t> <Cmd>FloatermToggle<CR>
-tnoremap <C-t> <C-\><C-n><Cmd>FloatermToggle<CR>
-"LazyGit
-nnoremap <leader>gg <Cmd>FloatermNew lazygit<CR>
 "Calculate current line
-nnoremap <leader>c yy<Cmd>echo <C-r>=<C-r>0<CR><CR>
-"Paste last calculated line
-nnoremap <leader>C a<C-r>=<C-r>0<CR><esc>
-"Insert and calculate
-nnoremap <leader>= a<C-r>=
+py from math import *
+nnoremap <leader>c yy:echo pyeval('<C-r>0')<CR>
+"Calculate current line to register a and paste result with =
+nnoremap <leader>C yy:let @a = string(pyeval('<C-r>0'))<CR>$a = <esc>"ap
+"Replace =expr with result
+vnoremap <leader>= s<esc>:let @a = string(pyeval('<C-r>"'))<CR>"ap
 "Insert new line above/below
 nnoremap <leader>o o<esc>
 nnoremap <leader>O O<esc>
@@ -47,6 +43,20 @@ inoremap <M-up> <esc>ddkP
 ",/ to clear search highlighting
 nnoremap <leader>/ <Cmd>noh<CR>
 
+"-------------------
+"| Plugin Mappings |
+"-------------------
+"Terminal Floaterm
+nnoremap <C-t> <Cmd>FloatermToggle<CR>
+tnoremap <C-t> <C-\><C-n><Cmd>FloatermToggle<CR>
+"LazyGit
+nnoremap <leader>gg <Cmd>FloatermNew lazygit<CR>
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
 "------------
 "| Settings |
 "------------
@@ -63,7 +73,7 @@ syntax on				"Enable syntax highlighting
 set mouse=a				"Enables mouse
 set linebreak			"Prevents words from breaking over line
 set breakindent			"Indent wrapped lines
-let &showbreak='  '	    "Indent amount
+let &showbreak='    '	"Indent amount
 set scrolloff=7         "keeps 7 lines below cursor when scrolling
 set showcmd             "Shows current mode"
 
@@ -94,6 +104,8 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 "Snippets
 Plug 'L3MON4D3/LuaSnip', {'tag': 'v<CurrentMajor>.*', 'do': 'make install_jsregexp'}
 Plug 'saadparwaiz1/cmp_luasnip'
@@ -101,6 +113,12 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'voldikss/vim-floaterm'
 "Latex support
 Plug 'lervag/vimtex'
+"Buffer tab header
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
+"File explorer
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 "Git status
 Plug 'mhinz/vim-signify'
 "Start screen with quick file access
@@ -116,6 +134,9 @@ Plug 'mbbill/undotree'
 Plug 'unblevable/quick-scope'
 "Quick container editing
 Plug 'tpope/vim-surround' 
+"Dependencies
+Plug 'nvim-lua/plenary.nvim'
+Plug 'MunifTanjim/nui.nvim'
 
 " Use Tab to expand and jump through snippets
 imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
@@ -141,7 +162,9 @@ smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '
 
 call plug#end()
 
-"Lua plugin config
+"---------------------
+"| Lua plugin config |
+"---------------------
 lua <<EOF
 
 -- LuaSnip config
@@ -166,8 +189,6 @@ snippet = {
     end,
     },
     mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
     ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
@@ -175,11 +196,29 @@ snippet = {
     sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    }, {
-        { name = 'buffer' },
+    { name = 'path' },
+    { name = 'buffer' },
     })
     })
 
+-- lspconfig 
+local lspconfig = require('lspconfig')
+local lsp_defaults = lspconfig.util.default_config
+
+lsp_defaults.capabilities = vim.tbl_deep_extend(
+  'force',
+  lsp_defaults.capabilities,
+  require('cmp_nvim_lsp').default_capabilities()
+)
+
+--file explorer
+require('telescope').load_extension('fzf')
+require("telescope").load_extension("file_browser")
+--lsp config
+require('mason-config')
+--bufferline
+require("bufferline").setup{}
+--lualine
 require('lualine').setup()
 
 EOF
