@@ -2,6 +2,8 @@
 "| Custom Key Mappings |
 "-----------------------
 let g:mapleader = ','
+"Source config file
+nnoremap <leader>S <Cmd>source $MYVIMRC<CR>
 "space bar to enter command mode
 nnoremap <space> :
 ":Q to quit without saving
@@ -22,11 +24,10 @@ py from math import *
 nnoremap <leader>c yy:echo pyeval('<C-r>0')<CR>
 "Calculate current line to register a and paste result with =
 nnoremap <leader>C yy:let @a = string(pyeval('<C-r>0'))<CR>$a = <esc>"ap
-"Replace =expr with result
+"Replace slected expression with result
 vnoremap <leader>= s<esc>:let @a = string(pyeval('<C-r>"'))<CR>"ap
-"Insert new line above/below
-nnoremap <leader>o o<esc>
-nnoremap <leader>O O<esc>
+"Interactive Caalculator using python3 terminal
+nnoremap <leader>cc <Cmd>FloatermNew<CR><C-\><C-n><Cmd>FloatermSend calc<CR>a
 "Drag lines
 vnoremap <M-j> <Cmd>m'>+<CR>gv
 vnoremap <M-k> <Cmd>m-2<CR>gv
@@ -116,7 +117,7 @@ Plug 'lervag/vimtex'
 "Buffer tab header
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
 "File explorer
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
+Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 "Git status
@@ -212,6 +213,7 @@ lsp_defaults.capabilities = vim.tbl_deep_extend(
 )
 
 --file explorer
+require('telescope').setup{}
 require('telescope').load_extension('fzf')
 require("telescope").load_extension("file_browser")
 --lsp config
