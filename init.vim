@@ -4,6 +4,7 @@
 let g:mapleader = ','
 "Source config file
 nnoremap <leader>S <Cmd>source $MYVIMRC<CR>
+nnoremap λ G
 "space bar to enter command mode
 nnoremap <space> :
 ":Q to quit without saving
@@ -21,13 +22,13 @@ nnoremap <leader>p "+p
 nnoremap Y y$
 "Calculate current line
 py from math import *
-nnoremap <leader>c yy:echo pyeval('<C-r>0')<CR>
+nnoremap <leader>cc yy:echo pyeval(substitute(@0,'\^','**','g'))<CR>
 "Calculate current line to register a and paste result with =
-nnoremap <leader>C yy:let @a = string(pyeval('<C-r>0'))<CR>$a = <esc>"ap
+nnoremap <leader>c= yy:let @a = string(pyeval(substitute(@0,'\^','**','g')))<CR>$a = <esc>"ap
 "Replace slected expression with result
-vnoremap <leader>= s<esc>:let @a = string(pyeval('<C-r>"'))<CR>"ap
+vnoremap <leader>cr s<esc>:let @a = string(pyeval(substitute(@",'\^','**','g')))<CR>"ap
 "Interactive Caalculator using python3 terminal
-nnoremap <leader>cc <Cmd>FloatermNew<CR><C-\><C-n><Cmd>FloatermSend calc<CR>a
+nnoremap <leader>ct <Cmd>FloatermNew<CR><C-\><C-n><Cmd>FloatermSend calc<CR>a
 "Drag lines
 vnoremap <M-j> <Cmd>m'>+<CR>gv
 vnoremap <M-k> <Cmd>m-2<CR>gv
@@ -160,7 +161,6 @@ require("luasnip").config.set_config({
 enable_autosnippets = true,
 -- Use Tab to trigger visual selection
 store_selection_keys = "<Tab>",
-update_events = 'TextChanged,TextChangedI'
 })
 
 -- Load all snippets from the nvim/LuaSnip directory at startup

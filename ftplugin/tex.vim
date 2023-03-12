@@ -1,6 +1,7 @@
 " Custom mappings
 " Use `dsm` to delete surrounding math (replacing the default shorcut `ds$`)
 nmap dsm <Plug>(vimtex-env-delete-math)
+nmap tsm <Plug>(vimtex-env-toggle-math)
 " Use `am` and `im` for the inline math text object
 omap am <Plug>(vimtex-a$)
 xmap am <Plug>(vimtex-a$)

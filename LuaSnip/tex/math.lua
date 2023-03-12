@@ -4,7 +4,7 @@ end
 
 return {
 -- \texttt
-s({trig="tt", dscr="Expands 'tt' into '\texttt{}'"},
+s({trig="ttt", dscr="Expands 'ttt' into '\texttt{}'"},
   fmta(
     "\\texttt{<>}",
     { i(1) }
