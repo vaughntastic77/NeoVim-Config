@@ -1,12 +1,8 @@
 # Neovim Config
 
-NOTE: these instructions were written for my old vimscript config, and will be updated soon. The config is nevertheless ready to clone/fork and install in approximately the same manner described below.
-
 ## A complete configuration for writing LaTeX documents with [NeoVim](https://neovim.io).
 
-The following sections provide installation instructions for Mac, Arch, and Debian operating systems.
-In the [CheatSheet.md](https://github.com/benbrastmckie/.config/blob/master/CheatSheet.md) you can find all of the key-bindings that I have added to NeoVim for writing LaTeX documents, where the [LearningGit.md](https://github.com/benbrastmckie/.config/blob/master/LearningGit.md) provides resources specifically geared for integrating Git into your workflow.
-You can also find video series which: (1) demonstrates the [resulting functionality](https://www.youtube.com/playlist?list=PLBYZ1xfnKeDToZ2XXbUGSC7BkorWdyNh3) of the present configuration; (2) walks through the [installation process](https://www.youtube.com/playlist?list=PLBYZ1xfnKeDRbxgKSDZ-41U3DF9foKC1J); (3) explains how to [modify the configuration](https://www.youtube.com/watch?v=oyEPY6xFhs0&list=PLBYZ1xfnKeDT0LWxQQma8Yh-IfpmQ7UHr) for your own needs; and (4) indicates how to [use Git](https://www.youtube.com/watch?v=GIJG4QtZBYI&list=PLBYZ1xfnKeDQYYXIhKKrXhWOaSphnn9ZL) to track changes and collaborate with others.
+Filler
 
 ## Table of Contents
 
@@ -15,8 +11,7 @@ You can also find video series which: (1) demonstrates the [resulting functional
 3. [Debian Linux Insallation](#Debian-Linux-Installation)
 4. [Remapping Keys](#Remapping-Keys)
 
-The programs covered include: NeoVim, Git, Skim/Zathura, Zotero, Alacritty, Tmux, and Fish.
-I will also include information for globally remapping keys to [better](https://www.reddit.com/r/vim/comments/lsx5qv/just_mapped_my_caps_lock_to_escape_for_the_first/) suit writing LaTeX documents with NeoVim.
+The programs covered include: NeoVim, Git, Skim/Zathura, and Zotero.
 
 # Mac OS Installation
 
@@ -44,26 +39,6 @@ sudo rm -rf /Library/Developer/CommandLineTools
 xcode-select --install
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
-
-## [Fish](https://fishshell.com/)
-
-Although optional, I highly recommend that inexperienced users begin by installing Fish which makes working insider the terminal a little easier.
-Otherwise, you can skip to the next section.
-To install Fish, run the following commands in turn:
-
-```
-brew install fish
-curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
-omf install sashimi
-```
-
-To delete the welcome message, run:
-
-```
-set -U fish_greeting ""
-```
-
-Or add whatever you want between the quotes.
 
 ## Dependencies
 
@@ -320,51 +295,7 @@ sudo cp -R ~/.config/fonts/RobotoMono/ /Library/Fonts/
 
 If you intend to use the stock terminal, you will need to go into the terminal's settings to change the font to RobotoMono.
 You are now ready to write LaTex in NeoVim inside the stock terminal.
-If you intend to upgrade your terminal to Alacritty with Tmux (big difference in my view, and you've come this far anyhow), then proceed as follows:
 
-## [Alacritty](https://github.com/alacritty/alacritty) and [Tmux](https://github.com/tmux/tmux/wiki)
-
-Run the following in the terminal:
-
-```
-brew cask install alacritty
-brew install tmux
-```
-
-You will also need to move the Tmux configuration file to the appropriate location by running:
-
-```
-sudo cp ~/.config/tmux/.tmux.conf ~/.tmux.conf
-```
-
-Assuming that you already installed Fish above, you will now need to locate fish on your operating system by running the following:
-
-```
-which fish
-```
-
-The command should return `/usr/local/bin/fish` or something similar.
-Copy the path displayed and run the following:
-
-```
-nvim ~/.config/alacritty/alacritty.yml
-```
-
-Replace `/usr/bin/fish` with the location of fish, saving and exiting with `Space-q` or `:wq`.
-Quite the terminal and open Alacritty by hitting `Command + Space` and typing 'Alacritty', running the following to reset Tmux:
-
-```
-tmux kill-server
-```
-
-When you reopen `Alacritty` Fish should be the default shell inside a Tmux window.
-If you want to turn on the Vim keybindings within Fish, run the following:
-
-```
-fish_vi_key_bindings
-```
-
-You are now read use NeoVim in Alacritty, complete with Tmux and the Fish shell.
 I highly recommend swapping the CapsLock and Esc keys by opening `System Preferences -> Keyboard`, and making the appropriate changes.
 
 # Arch Linux Installation
@@ -617,66 +548,6 @@ sudo cp -R ~/.config/fonts/RobotoMono/ /usr/share/fonts
 
 If you intend to use the stock terminal, you will need to go into the terminal's settings to change the font to RobotoMono regular.
 You are now ready to write LaTex in NeoVim inside the stock terminal.
-If you intend to upgrade your terminal to Alacritty with Tmux and the Fish shell, then proceed as follows:
-
-## [Alacritty](https://github.com/alacritty/alacritty), [Tmux](https://github.com/tmux/tmux/wiki), and [Fish](https://fishshell.com/)
-
-Run the following in the terminal:
-
-```
-sudo pacman -S alacritty
-sudo pacman -S tmux
-sudo pacman -S fish
-```
-
-You will also need to move the Tmux configuration file to the appropriate location by running:
-
-```
-sudo cp ~/.config/tmux/.tmux.conf ~/.tmux.conf
-```
-
-Assuming that you installed Fish above, you will now need to locate fish on your operating system by running the following:
-
-```
-which fish
-```
-
-The command should return `/usr/bin/fish`.
-If the path is different, copy the path and run the following:
-
-```
-nvim ~/.config/alacritty/alacritty.yml
-```
-
-Replace '/usr/bin/fish' with the location of fish if different, saving and exiting with `Space-q`.
-Quite the terminal and open Alacritty, running the following to set a reasonable theme for Fish:
-
-```
-curl -L https://get.oh-my.fish | fish
-omf install sashimi
-```
-
-To delete the welcome message, run:
-
-```
-set fish_greeting
-```
-
-In order to reset Tmux, run:
-
-```
-tmux kill-server
-```
-
-When you reopen Alacritty, Fish should be the default shell inside a Tmux window.
-If you want to turn on the Vim keybindings within Fish, run the following:
-
-```
-fish_vi_key_bindings
-```
-
-You are now read use NeoVim in Alacritty, complete with Tmux and the Fish shell.
-I highly recommend swapping the CapsLock and Esc keys as detailed below for using Arch on a Macbook Pro.
 
 # Debian Linux Installation
 
@@ -906,133 +777,3 @@ If you intend to use the stock terminal, you will need to go into the terminal's
 You are now ready to write LaTex in NeoVim inside the stock terminal.
 If you intend to upgrade your terminal to Alacritty with Tmux and the Fish shell, then proceed as follows:
 
-## [Alacritty](https://github.com/alacritty/alacritty), [Tmux](https://github.com/tmux/tmux/wiki), and [Fish](https://fishshell.com/)
-
-Run the following in the terminal:
-
-```
-sudo apt install alacritty
-sudo apt install tmux
-sudo apt install fish
-```
-
-You will also need to move the Tmux configuration file to the appropriate location by running:
-
-```
-sudo cp ~/.config/tmux/.tmux.conf ~/.tmux.conf
-```
-
-Assuming that you installed Fish above, you will now need to locate fish on your operating system by running the following:
-
-```
-which fish
-```
-
-The command should return `/usr/bin/fish`.
-If the path is different, copy the path and run the following:
-
-```
-nvim ~/.config/alacritty/alacritty.yml
-```
-
-Replace '/usr/bin/fish' with the location of fish if different, saving and exiting with `Space-q`.
-Quite the terminal and open Alacritty, running the following to set a reasonable theme for Fish:
-
-```
-curl -L https://get.oh-my.fish | fish
-omf install sashimi
-```
-
-To delete the welcome message, run:
-
-```
-set fish_greeting
-```
-
-In order to reset Tmux, run:
-
-```
-tmux kill-server
-```
-
-When you reopen Alacritty, Fish should be the default shell inside a Tmux window.
-If you want to turn on the Vim keybindings within Fish, run the following:
-
-```
-fish_vi_key_bindings
-```
-
-You are now read use NeoVim in Alacritty, complete with Tmux and the Fish shell.
-I highly recommend swapping the CapsLock and Esc keys as detailed below for using Debian on a Macbook Pro.
-
-# Remapping Keys
-
-It can be convenient to swap keys so as to improve hand posture while working. For instance, one might switch the CapsLock and Esc keys, as well as turning Ctrl into Alt, Alt into Command, and Command into Ctrl.
-To include these remappings, run the following commands for Arch and Debian, respectively:
-
-Arch:
-
-```
-sudo pacman -S xorg-xmodmap
-sudo pacman -S xorg-xev
-sudo pacman -S xorg-setxkbmap
-```
-
-Debian:
-
-```
-sudo apt install xorg-xmodmap
-sudo apt install xorg-xev
-sudo apt install xorg-setxkbmap
-```
-
-In order to test to confirm the keycodes for your keyboard, run the following:
-
-```
-xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
-```
-
-This will open a white box which, when in focus, will print the keycodes of the depressed keys.
-In particular, test the `Ctrl` as well as both `Alt/Option` and `Command` keys on the left and right side of the keyboard.
-In order to get the `Command` keys to register, you will need to press `Shift+Command` which will print the keycode for `Shift` followed by the keycode for `Command`.
-Close the white box upon finishing, checking to see if the output matches the following:
-
-```
-37 control
-64 Alt_L
-133 Super_L
-134 Super_R
-108 Alt_R
-```
-
-If you output matches the above, you can run the following:
-
-```
-sudo cp ~/.config/.XmodmapMAC ~/.Xmodmap
-```
-
-If your output does not match the above, you will need to edit the following file accordingly by running:
-
-```
-nvim ~/.config/.Xmodmap
-```
-
-If you need to make changes to key mappings, you can test the result of editing `.Xmodmap` and running the following:
-
-```
-xmodmap ~/.config/.Xmodmap
-```
-
-Once you have .Xmodmap running the right key mappings, you will have to run the following so that .Xmodmap starts automatically:
-```
-sudo cp ~/.config/.Xmodmap ~/.Xmodmap
-cp ~/.config/.xmodmap.desktop ~/.config/autostart/
-```
-
-You can return to defaults by running:
-
-```
-setxkbmap
-```
-
-Once you achieve the desired result, reboot and confirm that the mappings are running as desired.
