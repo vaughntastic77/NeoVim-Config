@@ -2,14 +2,13 @@
 
 ## A complete configuration for writing LaTeX documents with [NeoVim](https://neovim.io).
 
-Filler
+I have provided steps to setup Neovim with my config to get you started. If you would like a deeper dive into capabilities and customizing your configuration, visit [ejmastnak's guide](https://www.ejmastnak.com/tutorials/vim-latex/intro/).
 
 ## Table of Contents
 
 1. [Mac OS Installation](#Mac-OS-Installation)
 2. [Arch Linux Installation](#Arch-Linux-Installation)
 3. [Debian Linux Insallation](#Debian-Linux-Installation)
-4. [Remapping Keys](#Remapping-Keys)
 
 The programs covered include: NeoVim, Git, Skim/Zathura, and Zotero.
 
@@ -128,7 +127,7 @@ If Git is not installed, run:
 brew install git
 ```
 
-Next install LazyGit by running:
+(Optional) Install LazyGit by running:
 
 ```
 brew install jesseduffield/lazygit/lazygit
@@ -180,17 +179,6 @@ If your SSH key stops working after rebooting, run the following command:
 ssh-add -K ~/.ssh/id_rsa
 ```
 
-If you get an error, retry the command above with a lowercase 'k'.
-
-### [Adding a Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)
-
-Create a personal access token (PAT) by going to GitHub.com, clicking your user icon in the top right, navigate to `Setting --> Developer settings --> Personal` access tokens, and set:
-
-- No expiration date
-- Select `repo` in scope/permissions
-
-You must then copy the PAT, pasting it into a temporary file saved on your computer.
-Next, open a terminal and run `git config -l` to see if you have already set the appropriate username and email.
 You can add these (if missing or incorrect) with the following commands:
 
 ```
@@ -198,19 +186,6 @@ You can add these (if missing or incorrect) with the following commands:
    git config --global user.email "EMAIL"
    git config -l
 ```
-You can now add your PAT by navigating to a directory in which you have initiated a git repo in which a remote has already been added, opening a file in that repo by running `nvim FILE`, making some small change in the file, and attempting to push that changes with LazyGit.
-That is, once the file is open in NeoVim, hit `<space>gg` and then `A` to stage all files, followed by `c` to commit the staged changes, and `P` to push changes to the remote repo.
-Enter your user name when prompted, followed by your PAT with `Ctrl+Shift+v` (or other depending on how past is achieved in your terminal enviornment).
-Assuming that this push works, close LazyGit with `Ctrl+c`, and reopen the terminal with `Ctrl+t`.
-Now run the following:
-```
-   git config --global credential.helper cache
-```
-Repeat the steps above to run another test, entering your username and PAT as before.
-Run one final test, checking to see if your credentials are now automatically submitted, avoiding the need to enter your username and PAT each time you push or pull changes.
-
-For more help, see these [video](https://www.youtube.com/watch?v=kHkQnuYzwoo) instructions.
-
 
 ## [Configuration](https://github.com/benbrastmckie/.config)
 
@@ -252,48 +227,31 @@ nvim
 
 After the plugins finish installing, quite NeoVim with `:qa!`.
 
-## [Zathura](https://pwmt.org/projects/zathura/)
+## [Skim](https://skim-app.sourceforge.io)
 
-Install the Zathura pdf viewer by running:
-
-```
-brew tap zegervdv/zathura
-brew install zathura
-```
-
-## [Zotero](https://www.zotero.org/)
-
-Download and install [Zotero](https://www.zotero.org/) along with the appropriate plugin for your preferred browser.
-Find a paper online, signing in to the journal as necessary and downloading the pdf manually.
-Now return to the paper on the journal's website and test the browser plugin for Zotero which should be displayed in the top right of the screen.
-Create the bib and bst directories, and move the .bst bibliography style files into the appropriate folder by running the following:
+Install the Skim pdf viewer by running:
 
 ```
-mkdir -p ~/Library/texmf/bibtex/bib
-cp -R ~/.config/latex/bst ~/Library/texmf/bibtex
+brew install skim
 ```
 
-Download and install Better BibTex by following [these](https://retorque.re/zotero-better-bibtex/installation/) instructions.
-Under `Edit` in the Zotero menu bar, select `Preferences` and open up the `Better BibTex` tab.
-Under the `Citation` sub-tab, replace the citation key format with `[auth][year]`.
-Also check `On item change` at the bottom left.
-Now switch to the `Automatic Export` sub-tab and check `On Change`.
-Close the Preferences window, returning to the main Zotero window.
-Right-click the main library folder in the left-most column, and select `Export Library`.
-Under the `Format` dropdown menu, select `Better BibTex`, selecting the `Keep Updated` box. 
-Save the file as `Zotero` (the extension will be added automatically) to ~/Library/texmf/bibtex/bib which you previously created.
-You are now ready to cite files in your Zotero database.
+In order to configure Vimtex to use skim we must have the following line in our config:
+
+```
+let g:vimtex_view_method = 'skim'
+```
+
+We must also configure skin to work with Neovim for forward and inverse search. Open skim and go to `Preferences > Sync` and select `PDF-TeX Sync Support`. For Neovim, set the `Preset` field to `Custom`, set the `Command` field to `nvim`, and the `Arguments` field to 
+
+```
+--headless -c "VimtexInverseSearch %line '%file'"
+```
 
 ## [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
 
 In order for NeoVim to load icons, it will be imporant to install a NerdFont.
-For simplicity, I have included RobotoMono in `~/.config/fonts` which you can now move to the appropriate folder on your computer by entering the following in the terminal:
 
-```
-sudo cp -R ~/.config/fonts/RobotoMono/ /Library/Fonts/
-```
-
-If you intend to use the stock terminal, you will need to go into the terminal's settings to change the font to RobotoMono.
+If you intend to use the stock terminal, you will need to go into the terminal's settings to change the font to a Nerd Font of your choice.
 You are now ready to write LaTex in NeoVim inside the stock terminal.
 
 I highly recommend swapping the CapsLock and Esc keys by opening `System Preferences -> Keyboard`, and making the appropriate changes.
@@ -375,7 +333,7 @@ If you run into errors, you may be missing the following dependency, which you c
 sudo pacman -S base-devel
 ```
 
-Next, install LazyGit using Yay by running:
+(Optional) Install LazyGit using Yay by running:
 
 ```
 yay -S lazygit
@@ -440,14 +398,19 @@ Saving the key completes the addition.
 
 ## [Configuration](https://github.com/benbrastmckie/.config)
 
-In order to clone the configuration files into the appropriate folder on your computer, enter the following into the terminal, hitting return after each line:
+I recommend forking my config so that you have your own version that you can customise for yourself. To do so, click `Fork` in my GitHub repo. This will copy the repo over to your GitHub. Now you can click the `Code` button in your repo on GitHub, sellecting SSH, and copying the address which you will use below. Alternatively, if you don't want to fork, click the `Code` button in my repo, copying the address in the same way. Now you are ready to open the terminal back up and run the following commands in order:
 
 ```
 cd ~/.config
-git init
-git remote add origin https://github.com/benbrastmckie/.config.git
-git pull origin master
-mkdir -p ~/.vim/files/info
+git clone YOUR-ADDRESS
+git remote -v
+```
+
+This last command should show that you have two addresses synced up, reading to push and pull changes to/from assuming that you went for the fork-option above. This will permit you keep your config backed up to your GitHub repo which you can then clone onto other computers if you want to reporduce your customised config instead of mine (that is once you customise it).
+
+Lastly, you can install the following:
+
+```
 sudo pacman -S python-pip
 sudo pip3 install neovim-remote
 sudo pacman -S yarn
@@ -540,13 +503,8 @@ You are now ready to cite files in your Zotero database.
 ## [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
 
 In order for NeoVim to load icons, it will be imporant to install a NerdFont.
-For simplicity, I have included RobotoMono in `~/.config/fonts` which you can now move to the appropriate folder on your computer by entering the following in the terminal:
 
-```
-sudo cp -R ~/.config/fonts/RobotoMono/ /usr/share/fonts
-```
-
-If you intend to use the stock terminal, you will need to go into the terminal's settings to change the font to RobotoMono regular.
+If you intend to use the stock terminal, you will need to go into the terminal's settings to change the font to a Nerd Font of your choice.
 You are now ready to write LaTex in NeoVim inside the stock terminal.
 
 # Debian Linux Installation
@@ -612,7 +570,7 @@ If Git is not installed, run:
 sudo apt install git
 ```
 
-Next, install LazyGit using Launchpad by running:
+(Optional) Install LazyGit using Launchpad by running:
 
 ```
 sudo add-apt-repository ppa:lazygit-team/release
@@ -682,13 +640,19 @@ Saving the key completes the addition.
 
 ## [Configuration](https://github.com/benbrastmckie/.config)
 
-In order to clone the configuration files into the appropriate folder on your computer, enter the following into the terminal, hitting return after each line:
+I recommend forking my config so that you have your own version that you can customise for yourself. To do so, click `Fork` in my GitHub repo. This will copy the repo over to your GitHub. Now you can click the `Code` button in your repo on GitHub, sellecting SSH, and copying the address which you will use below. Alternatively, if you don't want to fork, click the `Code` button in my repo, copying the address in the same way. Now you are ready to open the terminal back up and run the following commands in order:
 
 ```
 cd ~/.config
-git remote add origin https://github.com/benbrastmckie/.config.git
-git pull origin master
-mkdir -p ~/.vim/files/info
+git clone YOUR-ADDRESS
+git remote -v
+```
+
+This last command should show that you have two addresses synced up, reading to push and pull changes to/from assuming that you went for the fork-option above. This will permit you keep your config backed up to your GitHub repo which you can then clone onto other computers if you want to reporduce your customised config instead of mine (that is once you customise it).
+
+Lastly, you can install the following:
+
+```
 sudo apt install python-pip
 sudo pip3 install neovim-remote
 sudo apt install yarn
@@ -767,13 +731,6 @@ You are now ready to cite files in your Zotero database.
 ## [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
 
 In order for NeoVim to load icons, it will be imporant to install a NerdFont.
-For simplicity, I have included RobotoMono in `~/.config/fonts` which you can now move to the appropriate folder on your computer by entering the following in the terminal:
 
-```
-sudo cp -R ~/.config/fonts/RobotoMono/ /usr/share/fonts
-```
-
-If you intend to use the stock terminal, you will need to go into the terminal's settings to change the font to RobotoMono regular.
+If you intend to use the stock terminal, you will need to go into the terminal's settings to change the font to a Nerd Font of your choice.
 You are now ready to write LaTex in NeoVim inside the stock terminal.
-If you intend to upgrade your terminal to Alacritty with Tmux and the Fish shell, then proceed as follows:
-
