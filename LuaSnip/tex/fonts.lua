@@ -26,6 +26,14 @@ s({trig = "tul", dscr = "Expands 'tul' into LaTeX's underline{} command."},
     }
   )
 ),
+-- Teletype font
+s({trig="ttt", dscr="Expands 'ttt' into '\texttt{}'"},
+  fmta(
+    "\\texttt{<>}",
+    { i(1) }
+  ),
+  {condition = in_mathzone}
+),
 }
 
 

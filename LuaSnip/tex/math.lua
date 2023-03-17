@@ -3,14 +3,6 @@ local in_mathzone = function()
 end
 
 return {
--- \texttt
-s({trig="ttt", dscr="Expands 'ttt' into '\texttt{}'"},
-  fmta(
-    "\\texttt{<>}",
-    { i(1) }
-  ),
-  {condition = in_mathzone}
-),
 -- \frac
 s({trig="ff", dscr="Expands 'ff' into '\frac{}{}'"},
   fmta(
