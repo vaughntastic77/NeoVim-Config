@@ -1,4 +1,4 @@
-# .config
+# Neovim Config
 
 NOTE: these instructions were written for my old vimscript config, and will be updated soon. The config is nevertheless ready to clone/fork and install in approximately the same manner described below.
 
