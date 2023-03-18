@@ -4,13 +4,12 @@
 let g:mapleader = ','
 "Source config file
 nnoremap <leader>S <Cmd>source $MYVIMRC<CR>
-nnoremap λ G
 "space bar to enter command mode
 nnoremap <space> :
 ":Q to quit without saving
 cnoremap Q q!
 "Meta + . to repeat last command
-nnoremap <M-.> <Cmd><up><CR>
+nnoremap <M-.> :<up><CR>
 ",0 to go to end of line
 nnoremap <leader>0 $
 ",y/p to copy/paste to system
