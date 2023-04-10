@@ -7,7 +7,7 @@ nnoremap <leader>S <Cmd>source $MYVIMRC<CR>
 "space bar to enter command mode
 nnoremap <space> :
 ":Q to quit without saving
-cnoremap Q q!
+cnoremap qq q!
 "Meta + . to repeat last command
 nnoremap <M-.> :<up><CR>
 ",0 to go to end of line
@@ -43,6 +43,9 @@ inoremap <M-down> <esc>ddp
 inoremap <M-up> <esc>ddkP
 ",/ to clear search highlighting
 nnoremap <leader>/ <Cmd>noh<CR>
+"Python script save and run
+nnoremap <leader>pi <Cmd>w<CR><Cmd>FloatermNew! python3 %<Cr>
+nnoremap <leader>pr <Cmd>w<CR><Cmd>!python3 %<Cr>
 
 "-------------------
 "| Plugin Mappings |
@@ -132,7 +135,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 "Undo tree of all undos
 Plug 'mbbill/undotree'
 "Quick word maneuvering
-Plug 'unblevable/quick-scope'
+" Plug 'unblevable/quick-scope'
 "Quick container editing
 Plug 'tpope/vim-surround' 
 "Dependencies
@@ -146,6 +149,10 @@ smap <silent><expr> <Tab> luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : '<Ta
 " Use Shift-Tab to jump backwards through snippets
 imap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
 smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
+
+" Change Floaterm size
+let g:floaterm_width = 0.9
+let g:floaterm_height = 0.9
 
 call plug#end()
 
