@@ -12,6 +12,7 @@ cnoremap qq q!
 nnoremap <M-.> :<up><CR>
 ",0 to go to end of line
 nnoremap <leader>0 $
+vnoremap <leader>0 $
 ",y/p to copy/paste to system
 vnoremap <leader>y "+y
 nnoremap <leader>y "+y
@@ -139,8 +140,10 @@ Plug 'mbbill/undotree'
 "Quick container editing
 Plug 'tpope/vim-surround' 
 "Dependencies
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'MunifTanjim/nui.nvim'
+Plug 'jose-elias-alvarez/null-ls.nvim'
 
 " Use Tab to expand and jump through snippets
 imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
@@ -204,12 +207,24 @@ lsp_defaults.capabilities = vim.tbl_deep_extend(
   require('cmp_nvim_lsp').default_capabilities()
 )
 
+require('mason').setup()
+require('mason-lspconfig').setup()
+-- Set up lspconfig.
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+require('lspconfig')['pyright'].setup {
+capabilities = capabilities
+}
+require('lspconfig')['texlab'].setup {
+capabilities = capabilities
+}
+--require('lspconfig')['vim-language-server'].setup {
+--capabilities = capabilities
+--}
+
 --file explorer
 require('telescope').setup{}
 require('telescope').load_extension('fzf')
 require("telescope").load_extension("file_browser")
---lsp config
-require('mason-config')
 --bufferline
 require("bufferline").setup{}
 --lualine
