@@ -66,7 +66,7 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 "| Settings |
 "------------
 set number				"Enable line numbers
-set relativenumber		"Line numbers relative to current line
+"set relativenumber		"Line numbers relative to current line
 set tabstop=4			"4 spaces for tab
 set shiftwidth=4		"4 spaces for tab in front
 set expandtab			"Converts tabs to spaces
