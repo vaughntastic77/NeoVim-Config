@@ -157,6 +157,11 @@ smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '
 let g:floaterm_width = 0.9
 let g:floaterm_height = 0.9
 
+" Vimtex Skim
+let g:vimtex_view_method = 'skim'
+let g:vimtex_view_general_viewer = 'skim'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+
 call plug#end()
 
 "---------------------

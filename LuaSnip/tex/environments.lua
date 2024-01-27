@@ -1,5 +1,6 @@
 local helpers = require('luasnip-helper-funcs')
 local get_visual = helpers.get_visual
+local line_begin = require("luasnip.extras.expand_conditions").line_begin
 
 return {
 -- Environment snippet
@@ -15,6 +16,25 @@ s({trig="env", snippetType="autosnippet"},
       d(2, get_visual),
       i(0),
       rep(1),
+    }
+  ),
+  {condition = line_begin}
+),
+-- Figure environment snippet
+s({trig="fig", snippetType="autosnippet"},
+  fmta(
+    [[
+      \begin{figure}[ht]
+          \centering
+          \includegraphics[width=6in]{<>}
+          \caption{<>}
+      \end{figure}
+
+
+    ]],
+    {
+      i(1),
+      i(2),
     }
   ),
   {condition = line_begin}
