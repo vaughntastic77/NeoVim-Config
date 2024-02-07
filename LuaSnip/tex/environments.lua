@@ -28,6 +28,7 @@ s({trig="fig", snippetType="autosnippet"},
           \centering
           \includegraphics[width=6in]{<>}
           \caption{<>}
+          \label{fig:<>}
       \end{figure}
 
 
@@ -35,6 +36,7 @@ s({trig="fig", snippetType="autosnippet"},
     {
       i(1),
       i(2),
+      rep(1),
     }
   ),
   {condition = line_begin}
