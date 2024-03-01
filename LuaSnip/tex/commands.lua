@@ -30,7 +30,7 @@ s({trig="sssc", snippetType="autosnippet"},
 ),
 -- Subsubsubsection command
 s({trig="ssssc", snippetType="autosnippet"},
-  fmta("\\subsubsubsection{<>}",
+  fmta("\\subsubsection*{<>}",
     {
       i(1),
     }

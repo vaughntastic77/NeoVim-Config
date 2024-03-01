@@ -81,6 +81,7 @@ set breakindent			"Indent wrapped lines
 let &showbreak='    '	"Indent amount
 set scrolloff=7         "keeps 7 lines below cursor when scrolling
 set showcmd             "Shows current mode"
+set spelllang=en_us     "Set spell check to US english
 
 "--------------------------------------
 "| Auto install vim-plug if not found |

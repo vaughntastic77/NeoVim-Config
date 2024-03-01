@@ -29,11 +29,6 @@ s({trig=";D", snippetType="autosnippet"},
     t("\\Delta"),
   }
 ),
-s({trig=";D", snippetType="autosnippet"},
-  {
-    t("\\Delta"),
-  }
-),
 s({trig=";e", snippetType="autosnippet"},
   {
     t("\\epsilon"),
