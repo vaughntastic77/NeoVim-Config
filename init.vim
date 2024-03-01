@@ -25,9 +25,9 @@ py from math import *
 nnoremap <leader>cc yy:echo pyeval(substitute(@0,'\^','**','g'))<CR>
 "Calculate current line to register a and paste result with =
 nnoremap <leader>c= yy:let @a = string(pyeval(substitute(@0,'\^','**','g')))<CR>$a = <esc>"ap
-"Replace slected expression with result
+"Replace selected expression with result
 vnoremap <leader>cr s<esc>:let @a = string(pyeval(substitute(@",'\^','**','g')))<CR>"ap
-"Interactive Caalculator using python3 terminal
+"Interactive Calculator using python3 terminal
 nnoremap <leader>ct <Cmd>FloatermNew<CR><C-\><C-n><Cmd>FloatermSend calc<CR>a
 "Drag lines
 vnoremap <M-j> <Cmd>m'>+<CR>gv
@@ -47,6 +47,9 @@ nnoremap <leader>/ <Cmd>noh<CR>
 "Python script save and run
 nnoremap <leader>pi <Cmd>w<CR><Cmd>FloatermNew! python3 %<Cr>
 nnoremap <leader>pr <Cmd>w<CR><Cmd>!python3 %<Cr>
+"Enable/disable spell check
+nnoremap <leader>sp <Cmd>set spell<CR>
+nnoremap <leader>so <Cmd>set nospell<CR>
 
 "-------------------
 "| Plugin Mappings |
