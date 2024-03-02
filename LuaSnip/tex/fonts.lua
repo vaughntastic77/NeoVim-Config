@@ -31,8 +31,15 @@ s({trig="ttt", dscr="Expands 'ttt' into '\texttt{}'", snippetType="autosnippet"}
   fmta(
     "\\texttt{<>}",
     { i(1) }
-  ),
-  {condition = in_mathzone}
+  )
+),
+-- Red color font
+s({trig = "tred", dscr = "Expands 'tred' into '\textcolor{red}{}'", snippetType="autosnippet"},
+  fmta("\\underline{<>}",
+    {
+      d(1, get_visual),
+    }
+  )
 ),
 }
 
