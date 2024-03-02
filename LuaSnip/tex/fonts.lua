@@ -35,7 +35,7 @@ s({trig="ttt", dscr="Expands 'ttt' into '\texttt{}'", snippetType="autosnippet"}
 ),
 -- Red color font
 s({trig = "tred", dscr = "Expands 'tred' into '\textcolor{red}{}'", snippetType="autosnippet"},
-  fmta("\\underline{<>}",
+  fmta("\\textcolor{red}{<>}",
     {
       d(1, get_visual),
     }
