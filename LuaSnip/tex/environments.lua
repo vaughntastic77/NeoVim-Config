@@ -24,14 +24,12 @@ s({trig="env", snippetType="autosnippet"},
 s({trig="fig", snippetType="autosnippet"},
   fmta(
     [[
-      \begin{figure}[ht]
+      \begin{figure}[ht!]
           \centering
           \includegraphics[width=6in]{<>}
           \caption{<>}
           \label{fig:<>}
       \end{figure}
-
-
     ]],
     {
       i(1),
