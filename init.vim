@@ -116,14 +116,15 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 "Snippets
-Plug 'L3MON4D3/LuaSnip', {'tag': 'v<CurrentMajor>.*', 'do': 'make install_jsregexp'}
+Plug 'L3MON4D3/LuaSnip', {'tag': '*', 'do': 'make install_jsregexp'}
 Plug 'saadparwaiz1/cmp_luasnip'
 "Open a terminal over current session
 Plug 'voldikss/vim-floaterm'
 "Latex support
 Plug 'lervag/vimtex'
 "Buffer tab header
-Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 "File explorer
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
@@ -136,7 +137,6 @@ Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-commentary'
 "Custom info bar
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
 "Undo tree of all undos
 Plug 'mbbill/undotree'
 "Quick word maneuvering
